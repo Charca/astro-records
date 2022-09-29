@@ -1,0 +1,164 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import PlayButton from '../../components/PlayButton'
+import TrackList from '../../components/TrackList'
+
+import { MusicBrainzApi } from 'musicbrainz-api'
+
+const { id } = Astro.params
+
+const response = await fetch(`http://0.0.0.0:8787/albums/${id}`)
+const album = await response.json()
+
+/// Don't need this below
+
+const apiClient = new MusicBrainzApi({
+  appName: 'astro-records',
+  appVersion: '0.0.1',
+  appContactInfo: 'maxi@helpscout.com',
+})
+
+function padTo2Digits(num) {
+  return num.toString().padStart(2, '0')
+}
+
+function msToMinutes(milliseconds) {
+  const minutes = Math.floor(milliseconds / 60000)
+  const seconds = Math.round((milliseconds % 60000) / 1000)
+
+  return seconds === 60
+    ? `${minutes + 1}:00`
+    : `${minutes}:${padTo2Digits(seconds)}`
+}
+
+const release = await apiClient.lookupRelease(
+  '287f98ab-9216-4a13-846e-ceffe03ee084',
+  [
+    'recordings',
+    'artists',
+    'artist-credits',
+    'isrcs',
+    'url-rels',
+    'release-groups',
+  ]
+)
+
+const songs = release.media[0].tracks.map((track) => ({
+  id: track.id,
+  title: track.title,
+  length: msToMinutes(track.length),
+  lengthMs: track.length,
+  position: track.position,
+}))
+
+console.log(songs)
+---
+
+<Layout title="Astro Records">
+  <section>
+    <div
+      class="container mx-auto max-w-screen-lg px-6 lg:px-0 flex flex-col md:flex-row pt-8 pb-12"
+    >
+      <div class="relative mr-32">
+        <img
+          src={album.strAlbumThumb}
+          width="400"
+          height="400"
+          class="block rounded-md tag-album-cover relative z-10"
+        />
+        <img
+          src="/vynil-lp.webp"
+          width="400"
+          height="400"
+          class="absolute top-0 opacity-0 vynil-image vynil-animation-in"
+        />
+      </div>
+      <div class="flex-1 flex flex-col justify-end pt-8">
+        <h1
+          class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-5xl"
+        >
+          {album.strAlbum}
+        </h1>
+        <p class="mt-3 text-3xl">{album.strArtist}</p>
+        <p class="mt-2 text-lg">{album.strGenre} — {album.intYearReleased}</p>
+        <div class="mt-3">
+          <PlayButton
+            tracks={album.tracks}
+            artist={album.strArtist}
+            imageUrl={album.strAlbumThumb}
+            client:load
+          />
+
+          <button
+            type="button"
+            class="text-pink-600 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-lg px-10 py-3 text-center inline-flex items-center dark:focus:ring-gray-500 mr-4"
+          >
+            <svg
+              class="w-6 h-6 mr-2 -ml-1 text-pink-600"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+              ><path
+                fill-rule="evenodd"
+                d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z"
+                clip-rule="evenodd"></path>
+            </svg>
+
+            Shuffle
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mx-auto max-w-screen-lg mb-10">
+      <TrackList
+        tracks={album.tracks}
+        artist={album.strArtist}
+        imageUrl={album.strAlbumThumb}
+        client:visible
+      />
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .vynil-animation-in {
+    animation: appear 600ms ease-in-out 300ms forwards;
+  }
+
+  .vynil-animation-in-spinning {
+    animation: appear 600ms ease-in-out 300ms forwards, spin 5s linear infinite;
+  }
+
+  .vynil-animation-out {
+    animation: disappear 300ms ease-in-out forwards;
+  }
+
+  @keyframes appear {
+    0% {
+      left: 0;
+      opacity: 0;
+    }
+    1% {
+      opacity: 1;
+    }
+    100% {
+      left: 100px;
+      opacity: 1;
+    }
+  }
+
+  @keyframes disappear {
+    0% {
+      left: 100px;
+      opacity: 1;
+    }
+    99% {
+      opacity: 0;
+    }
+    100% {
+      left: 0;
+      opacity: 0;
+    }
+  }
+</style>
