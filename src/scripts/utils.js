@@ -6,10 +6,6 @@ export function getLink(href) {
   )
 }
 
-export function getPathId(path) {
-  return path.split('/')[2]
-}
-
 export async function wait(timeout) {
   return new Promise((resolve) => {
     setTimeout(() => resolve(), timeout)

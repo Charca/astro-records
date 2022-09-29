@@ -17,7 +17,6 @@ const { title } = Astro.props
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="turbo-cache-control" content="no-preview" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <script>
@@ -30,8 +29,6 @@ const { title } = Astro.props
     <Header />
     <slot />
     <Footer />
-    <div id="audio-player" data-turbo-permanent>
-      <Player client:load />
-    </div>
+    <Player client:load />
   </body>
 </html>
