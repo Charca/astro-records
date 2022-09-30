@@ -1,49 +1,41 @@
-# Welcome to [Astro](https://astro.build)
+<p align="center">
+  <a href="https://www.learnwithjason.dev">
+    <img src="https://res.cloudinary.com/jlengstorf/image/upload/q_auto,f_auto,w_240/v1579281727/lwj/learnwithjason.png" alt="Learn With Jason" width="120" />
+  </a>
+</p>
+<h1 align="center">
+  Smooth Page Transitions with Astro & the Shared Element Transition API (with Maxi Ferreira)
+</h1>
+<h3 align="center">
+  This app was built live on <em>Learn With Jason</em> and it was super fun and I’m sad you weren’t there.
+</h3>
+<p align="center">
+  But don’t worry! You can still: 
+  <a href="https://www.learnwithjason.dev/smooth-page-transitions-with-astro-and-the-shared-element-transition-api"><strong>watch the video</strong></a> · 
+  <a href="https://shared-element-transition-astro.netlify.app"><strong>see the demo</strong></a> · 
+  <a href="https://app.netlify.com/start/deploy?repository=https://github.com/jlengstorf/astro-records&utm_source=learnwithjason&utm_medium=github&utm_campaign=devex"><strong>deploy this project</strong></a> · 
+  <a href="https://jason.af/lwj/schedule"><strong>see upcoming episodes</strong></a>
+</p>
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
+&nbsp;
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Can you make a multi-page app (MPA) feel like a single-page app (SPA)? Maxi Ferreira says we can and will show us how to do it.
 
-![basics](https://user-images.githubusercontent.com/4677417/186188965-73453154-fdec-4d6b-9c34-cb35c248ae5b.png)
+&nbsp;
 
+## More Information
 
-## 🚀 Project Structure
+- [Watch this app get built live + see links and additional resources][episode]
+- [Follow _Learn With Jason_ on Twitch][twitch] to watch future episodes live
+- [Add the _Learn With Jason_ schedule to your Google Calendar][cal]
 
-Inside of your Astro project, you'll see the following folders and files:
+&nbsp;
+<p align="center">
+  <a href="https://app.netlify.com/start/deploy?repository=https://github.com/jlengstorf/astro-records&utm_source=learnwithjason&utm_medium=github&utm_campaign=devex">
+    <img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy this project to Netlify" />
+  </a>
+</p>
 
-```
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                | Action                                             |
-| :--------------------- | :------------------------------------------------- |
-| `npm install`          | Installs dependencies                              |
-| `npm run dev`          | Starts local dev server at `localhost:3000`        |
-| `npm run build`        | Build your production site to `./dist/`            |
-| `npm run preview`      | Preview your build locally, before deploying       |
-| `npm run astro ...`    | Run CLI commands like `astro add`, `astro preview` |
-| `npm run astro --help` | Get help using the Astro CLI                       |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+[episode]: https://www.learnwithjason.dev/smooth-page-transitions-with-astro-and-the-shared-element-transition-api
+[twitch]: https://jason.af/twitch
+[cal]: https://jason.af/lwj/cal

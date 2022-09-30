@@ -1,6 +1,6 @@
-import { currentTrack, isPlaying } from './state'
+import { currentTrack, isPlaying } from './state';
 
-import { useEffect, useState, useRef } from 'preact/hooks'
+import { useEffect, useState, useRef } from 'preact/hooks';
 
 const PlayIcon = (
   <svg
@@ -15,7 +15,7 @@ const PlayIcon = (
       clip-rule="evenodd"
     ></path>
   </svg>
-)
+);
 
 const PauseIcon = (
   <svg
@@ -30,50 +30,50 @@ const PauseIcon = (
       clip-rule="evenodd"
     />
   </svg>
-)
+);
 
 export default function Player() {
-  const audioPlayer = useRef<HTMLAudioElement>(null)
-  const progressRef = useRef(null)
-  const [trackSrc, setTrackSrc] = useState('/mp3/song1.mp3')
-  const [progress, setProgress] = useState(0)
+  const audioPlayer = useRef<HTMLAudioElement>(null);
+  const progressRef = useRef(null);
+  const [trackSrc, setTrackSrc] = useState('/mp3/song1.mp3');
+  const [progress, setProgress] = useState(0);
 
   if (currentTrack.value === null) {
-    return
+    return;
   }
 
-  const { title, artist, imageUrl } = currentTrack.value
+  const { title, artist, imageUrl } = currentTrack.value;
 
   function whilePlaying() {
     const percentage =
-      (audioPlayer.current.currentTime * 100) / audioPlayer.current.duration
-    setProgress(percentage)
-    progressRef.current = requestAnimationFrame(whilePlaying)
+      (audioPlayer.current.currentTime * 100) / audioPlayer.current.duration;
+    setProgress(percentage);
+    progressRef.current = requestAnimationFrame(whilePlaying);
   }
 
   useEffect(() => {
-    audioPlayer.current.currentTime = 0
-  }, [title])
+    audioPlayer.current.currentTime = 0;
+  }, [title]);
 
   useEffect(() => {
     if (isPlaying.value) {
-      audioPlayer.current?.play()
-      progressRef.current = requestAnimationFrame(whilePlaying)
+      audioPlayer.current?.play();
+      progressRef.current = requestAnimationFrame(whilePlaying);
     } else {
-      audioPlayer.current?.pause()
-      cancelAnimationFrame(progressRef.current)
+      audioPlayer.current?.pause();
+      cancelAnimationFrame(progressRef.current);
     }
-  }, [isPlaying.value])
+  }, [isPlaying.value]);
 
   useEffect(() => {
     if (progress >= 99.99) {
-      isPlaying.value = false
-      setProgress(0)
+      isPlaying.value = false;
+      setProgress(0);
     }
-  }, [progress])
+  }, [progress]);
 
   return (
-    <div class="fixed bottom-0 left-0 right-0 bg-gray-100">
+    <div class="bottom-player fixed bottom-0 left-0 right-0 bg-gray-100">
       <div class="flex-1 bg-gray-200 h-1.5 dark:bg-gray-700">
         <div class="bg-pink-500 h-1.5" style={`width: ${progress}%`}></div>
       </div>
@@ -108,5 +108,5 @@ export default function Player() {
         </div>
       </div>
     </div>
-  )
+  );
 }

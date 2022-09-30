@@ -1,14 +1,14 @@
 ---
-import Footer from '../components/Footer.astro'
-import Header from '../components/Header.astro'
-import Player from '../components/Player'
-import '../styles/transitions.css'
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import Player from '../components/Player';
+import '../styles/transitions.css';
 
 export interface Props {
-  title: string
+  title: string;
 }
 
-const { title } = Astro.props
+const { title } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -20,7 +20,7 @@ const { title } = Astro.props
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <script>
-      import '../scripts/router.js'
+      import '../scripts/router.js';
     </script>
   </head>
   <body
@@ -29,6 +29,8 @@ const { title } = Astro.props
     <Header />
     <slot />
     <Footer />
-    <Player client:load />
+    <div data-turbo-permanent id="player">
+      <Player client:load />
+    </div>
   </body>
 </html>

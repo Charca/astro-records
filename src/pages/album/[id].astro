@@ -1,14 +1,14 @@
 ---
-import Layout from '../../layouts/Layout.astro'
-import PlayButton from '../../components/PlayButton'
-import TrackList from '../../components/TrackList'
+import Layout from '../../layouts/Layout.astro';
+import PlayButton from '../../components/PlayButton';
+import TrackList from '../../components/TrackList';
 
-const { id } = Astro.params
+const { id } = Astro.params;
 
 const response = await fetch(
-  `https://music-api.charca.workers.dev/albums/${id}`
-)
-const album = await response.json()
+  `https://music-api.charca.workers.dev/albums/${id}`,
+);
+const album = await response.json();
 ---
 
 <Layout title="Astro Records">
@@ -21,7 +21,7 @@ const album = await response.json()
           src={album.strAlbumThumb}
           width="400"
           height="400"
-          class="block rounded-md tag-album-cover relative z-10"
+          class="album-image block rounded-md tag-album-cover relative z-10"
         />
         <!-- <img
           src="/vynil-lp.webp"

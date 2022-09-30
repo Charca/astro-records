@@ -1,0 +1,39 @@
+::page-transition-outgoing-image(root),
+::page-transition-incoming-image(root) {
+  /* animation-duration: 2s; */
+}
+
+/* ::page-transition-outgoing-image(root) {
+  animation: 2s slide-left ease-out;
+}
+
+::page-transition-incoming-image(root) {
+  animation: 2s slide-right ease-out;
+} */
+
+.page-header {
+  page-transition-tag: header;
+  contain: paint;
+}
+
+.album-image {
+  page-transition-tag: image;
+  contain: paint;
+}
+
+.bottom-player {
+  page-transition-tag: player;
+  contain: paint;
+}
+
+@keyframes slide-right {
+  from {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes slide-left {
+  to {
+    transform: translateX(-100%);
+  }
+}
