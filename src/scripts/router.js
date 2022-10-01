@@ -19,6 +19,13 @@ function onBeforeRender(event) {
   document.removeEventListener('turbo:before-render', onBeforeRender)
 }
 
+function addTransitionTag(pathname) {
+  const link = getLink(pathname)
+  const image = link.querySelector('.card-image')
+  image.classList.add('tag-album-cover')
+  return image
+}
+
 async function handleHomeNavigation(event) {
   const transition = document.createDocumentTransition()
 
@@ -33,17 +40,13 @@ async function handleHomeNavigation(event) {
 
   transition
     .start(async () => {
-      event.detail.resume()
-
-      await new Promise((resolve) => requestAnimationFrame(resolve))
+      await event.detail.resume()
 
       const fromPath =
         Turbo.navigator.lastVisit?.location.pathname ||
         Turbo.navigator.currentVisit.referrer.pathname
 
-      const link = getLink(fromPath)
-      image = link.querySelector('.card-image')
-      image.classList.add('tag-album-cover')
+      image = addTransitionTag(fromPath)
     })
     .then(() => {
       image.classList.remove('tag-album-cover')
@@ -52,9 +55,7 @@ async function handleHomeNavigation(event) {
 
 function handleAlbumNavigation(event) {
   const toPath = location.pathname
-  const link = getLink(toPath)
-  const image = link.querySelector('.card-image')
-  image.classList.add('tag-album-cover')
+  const image = addTransitionTag(toPath)
 
   const transition = document.createDocumentTransition()
   transition.start(() => {

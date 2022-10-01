@@ -7,7 +7,9 @@ import { MusicBrainzApi } from 'musicbrainz-api'
 
 const { id } = Astro.params
 
-const response = await fetch(`http://0.0.0.0:8787/albums/${id}`)
+const response = await fetch(
+  `https://music-api.charca.workers.dev/albums/${id}`
+)
 const album = await response.json()
 
 /// Don't need this below
