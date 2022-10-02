@@ -12,7 +12,13 @@ const { id, name, artist, image_url } = Astro.props
 <div class="flex flex-col">
   <a href={`/album/${id}`} class="text-black hover:text-pink-500">
     <div class="shadow-md hover:shadow-lg">
-      <img class="card-image rounded-md" src={image_url} alt={name} />
+      <img
+        class="card-image rounded-md"
+        src={image_url}
+        alt={name}
+        width="400"
+        height="400"
+      />
     </div>
     <p class="pt-4 font-semibold">{name}</p>
     <p class="pt-1 text-gray-700">{artist}</p>

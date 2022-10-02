@@ -8,6 +8,7 @@ export type Track = {
 }
 
 export type PlayerTrack = Track & {
+  albumId: string
   artist: string
   imageUrl: string
 }

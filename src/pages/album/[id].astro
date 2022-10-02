@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro'
 import PlayButton from '../../components/PlayButton'
 import TrackList from '../../components/TrackList'
+import Record from '../../components/Record'
 
 const { id } = Astro.params
 
@@ -14,22 +15,14 @@ const album = await response.json()
 <Layout title="Astro Records">
   <section>
     <div
-      class="container mx-auto max-w-screen-lg px-6 lg:px-0 flex flex-col md:flex-row pt-8 pb-12"
+      class="container mx-auto max-w-screen-lg px-6 lg:px-0 flex flex-col items-start md:items-end md:flex-row pt-8 pb-12"
     >
-      <div class="relative mr-8">
-        <img
-          src={album.strAlbumThumb}
-          width="400"
-          height="400"
-          class="block rounded-md tag-album-cover relative z-10"
-        />
-        <!-- <img
-          src="/vynil-lp.webp"
-          width="400"
-          height="400"
-          class="absolute top-0 opacity-0 vynil-image"
-        /> -->
-      </div>
+      <Record
+        client:visible
+        albumId={album.idAlbum}
+        title={album.strAlbum}
+        imageUrl={album.strAlbumThumb}
+      />
       <div class="flex-1 flex flex-col justify-end pt-8">
         <h1 class="text-5xl font-bold tracking-tight text-gray-900">
           {album.strAlbum}
@@ -39,6 +32,7 @@ const album = await response.json()
         <div class="mt-3 flex">
           <PlayButton
             tracks={album.tracks}
+            albumId={album.idAlbum}
             artist={album.strArtist}
             imageUrl={album.strAlbumThumb}
             client:load
@@ -68,6 +62,7 @@ const album = await response.json()
     <div class="container mx-auto max-w-screen-lg mb-10">
       <TrackList
         tracks={album.tracks}
+        albumId={album.idAlbum}
         artist={album.strArtist}
         imageUrl={album.strAlbumThumb}
         client:visible
@@ -75,33 +70,3 @@ const album = await response.json()
     </div>
   </section>
 </Layout>
-
-<style>
-  @keyframes appear {
-    0% {
-      left: 0;
-      opacity: 0;
-    }
-    1% {
-      opacity: 1;
-    }
-    100% {
-      left: 100px;
-      opacity: 1;
-    }
-  }
-
-  @keyframes disappear {
-    0% {
-      left: 100px;
-      opacity: 1;
-    }
-    99% {
-      opacity: 0;
-    }
-    100% {
-      left: 0;
-      opacity: 0;
-    }
-  }
-</style>

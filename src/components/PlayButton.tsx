@@ -2,11 +2,17 @@ import { currentTrack, isPlaying, Track } from './state'
 
 type Props = {
   tracks: Track[]
+  albumId: string
   artist: string
   imageUrl: string
 }
 
-export default function PlayButton({ tracks, artist, imageUrl }: Props) {
+export default function PlayButton({
+  tracks,
+  albumId,
+  artist,
+  imageUrl,
+}: Props) {
   return (
     <button
       type="button"
@@ -14,6 +20,7 @@ export default function PlayButton({ tracks, artist, imageUrl }: Props) {
       onClick={() => {
         currentTrack.value = {
           ...tracks[0],
+          albumId,
           artist,
           imageUrl,
         }

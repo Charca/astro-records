@@ -7,7 +7,7 @@ const PlayIcon = (
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     fill="currentColor"
-    class="w-14 h-14"
+    class="w-10 h-10 sm:w-14 sm:h-14"
   >
     <path
       fill-rule="evenodd"
@@ -22,7 +22,7 @@ const PauseIcon = (
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     fill="currentColor"
-    class="w-14 h-14"
+    class="w-10 h-10 sm:w-14 sm:h-14"
   >
     <path
       fill-rule="evenodd"
@@ -77,11 +77,15 @@ export default function Player() {
       <div class="flex-1 bg-gray-200 h-1.5 dark:bg-gray-700">
         <div class="bg-pink-500 h-1.5" style={`width: ${progress}%`}></div>
       </div>
-      <div class="container mx-auto max-w-screen-lg px-6 py-4 flex items-center gap-5">
+      <div class="container mx-auto max-w-screen-lg px-3 py-2 sm:px-6 sm:py-4 flex items-center gap-5">
         <img src={imageUrl} width="60" height="60" class="block rounded-md" />
-        <div class="flex-1">
-          <p class="text-xl font-medium">{title}</p>
-          <p class="text-xl text-gray-500">{artist}</p>
+        <div class="flex-1 min-w-0">
+          <p class="text-xl font-medium overflow-hidden text-ellipsis whitespace-nowrap">
+            {title}
+          </p>
+          <p class="text-xl text-gray-500 overflow-hidden text-ellipsis whitespace-nowrap">
+            {artist}
+          </p>
         </div>
         <audio ref={audioPlayer} src={trackSrc} />
         <div class="flex gap-6 items-center text-black">
@@ -89,7 +93,7 @@ export default function Player() {
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
-            class="w-10 h-10"
+            class="w-10 h-10 hidden sm:block"
           >
             <path d="M9.195 18.44c1.25.713 2.805-.19 2.805-1.629v-2.34l6.945 3.968c1.25.714 2.805-.188 2.805-1.628V8.688c0-1.44-1.555-2.342-2.805-1.628L12 11.03v-2.34c0-1.44-1.555-2.343-2.805-1.629l-7.108 4.062c-1.26.72-1.26 2.536 0 3.256l7.108 4.061z"></path>
           </svg>
@@ -101,7 +105,7 @@ export default function Player() {
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
-            class="w-10 h-10"
+            class="w-10 h-10 hidden sm:block"
           >
             <path d="M5.055 7.06c-1.25-.714-2.805.189-2.805 1.628v8.123c0 1.44 1.555 2.342 2.805 1.628L12 14.471v2.34c0 1.44 1.555 2.342 2.805 1.628l7.108-4.061c1.26-.72 1.26-2.536 0-3.256L14.805 7.06C13.555 6.346 12 7.25 12 8.688v2.34L5.055 7.06z"></path>
           </svg>

@@ -2,6 +2,7 @@ import { currentTrack, isPlaying, Track } from './state'
 
 type Props = {
   tracks: Track[]
+  albumId: string
   artist: string
   imageUrl: string
 }
@@ -37,7 +38,12 @@ const pauseIcon = (
   </svg>
 )
 
-export default function TrackList({ tracks, artist, imageUrl }: Props) {
+export default function TrackList({
+  tracks,
+  albumId,
+  artist,
+  imageUrl,
+}: Props) {
   return (
     <ul class="text-xl">
       {tracks.map((track) => {
@@ -49,6 +55,7 @@ export default function TrackList({ tracks, artist, imageUrl }: Props) {
             onClick={() => {
               currentTrack.value = {
                 ...track,
+                albumId,
                 artist,
                 imageUrl,
               }
