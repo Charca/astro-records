@@ -32,10 +32,14 @@ const PauseIcon = (
   </svg>
 )
 
+// This app doesn't have real songs, it only has a few songs
+// that we will play over and over as the user uses the app.
+const MAX_SONGS = 4
+
 export default function Player() {
   const audioPlayer = useRef<HTMLAudioElement>(null)
   const progressRef = useRef(null)
-  const [trackSrc, setTrackSrc] = useState('/mp3/song1.mp3')
+  const [songIndex, setSongIndex] = useState(4)
   const [progress, setProgress] = useState(0)
 
   if (currentTrack.value === null) {
@@ -52,7 +56,11 @@ export default function Player() {
   }
 
   useEffect(() => {
+    const newIndex = (songIndex % MAX_SONGS) + 1
+    audioPlayer.current.src = `/mp3/song${newIndex}.mp3`
     audioPlayer.current.currentTime = 0
+    audioPlayer.current.play()
+    setSongIndex(newIndex)
   }, [title])
 
   useEffect(() => {
@@ -87,7 +95,7 @@ export default function Player() {
             {artist}
           </p>
         </div>
-        <audio ref={audioPlayer} src={trackSrc} />
+        <audio ref={audioPlayer} src="/mp3/song1.mp3" />
         <div class="flex gap-6 items-center text-black">
           <svg
             xmlns="http://www.w3.org/2000/svg"
