@@ -11,11 +11,11 @@ const albums = await response.json()
     <div
       class="container mx-auto max-w-screen-lg px-6 lg:px-0 flex items-center flex-wrap pt-4 pb-12"
     >
-      <h2 class="font-bold text-2xl text-black tracking-tight mb-6">
-        2000s Favorites
+      <h2 class="font-bold text-3xl text-black tracking-tight mb-12">
+        Recently Played
       </h2>
 
-      <div class="w-full grid grid-cols-2 md:grid-cols-3 gap-8">
+      <div class="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
         {
           albums.results.map((album) => (
             <Card

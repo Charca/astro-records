@@ -16,7 +16,7 @@ function onBeforeRender(event) {
 
   if (location.pathname === '/') {
     handleHomeNavigation(event)
-  } else {
+  } else if (location.pathname.startsWith('/album')) {
     handleAlbumNavigation(event)
   }
 
@@ -38,10 +38,9 @@ async function handleHomeNavigation(event) {
         Turbo.navigator.currentVisit.referrer.pathname
 
       image = addTransitionTag(fromPath)
-      image.scrollIntoViewIfNeeded()
     })
     .then(() => {
-      image.classList.remove('tag-album-cover')
+      image?.classList.remove('tag-album-cover')
     })
 }
 
@@ -51,7 +50,7 @@ function handleAlbumNavigation(event) {
 
   const transition = document.createDocumentTransition()
   transition.start(() => {
-    image.classList.remove('tag-album-cover')
+    image?.classList.remove('tag-album-cover')
     event.detail.resume()
   })
 }
@@ -66,8 +65,8 @@ async function animateVynil() {
 
 function addTransitionTag(pathname) {
   const link = document.querySelector(`[href="${pathname}"]`)
-  const image = link.querySelector('.card-image')
-  image.classList.add('tag-album-cover')
+  const image = link?.querySelector('.card-image')
+  image?.classList.add('tag-album-cover')
   return image
 }
 
