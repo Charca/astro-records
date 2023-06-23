@@ -1,6 +1,6 @@
 .tag-album-cover {
   contain: paint;
-  page-transition-tag: album-cover;
+  view-transition-name: album-cover;
 }
 
 .vynil-animation-in {

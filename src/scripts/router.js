@@ -10,7 +10,7 @@ function onBeforeRender(event) {
   event.preventDefault()
 
   // No support for the Shared Element Transition API
-  if (!document.createDocumentTransition) {
+  if (!document.startViewTransition) {
     return event.detail.resume()
   }
 
@@ -24,32 +24,29 @@ function onBeforeRender(event) {
 }
 
 async function handleHomeNavigation(event) {
-  const transition = document.createDocumentTransition()
   let image
-
   await animateVynil()
 
-  transition
-    .start(async () => {
-      await event.detail.resume()
+  const transition = document.startViewTransition(async () => {
+    await event.detail.resume()
 
-      const fromPath =
-        Turbo.navigator.lastVisit?.location.pathname ||
-        Turbo.navigator.currentVisit.referrer.pathname
+    const fromPath =
+      Turbo.navigator.lastVisit?.location.pathname ||
+      Turbo.navigator.currentVisit.referrer.pathname
 
-      image = addTransitionTag(fromPath)
-    })
-    .then(() => {
-      image?.classList.remove('tag-album-cover')
-    })
+    image = addTransitionTag(fromPath)
+  })
+
+  await transition.finished
+
+  image?.classList.remove('tag-album-cover')
 }
 
 function handleAlbumNavigation(event) {
   const toPath = location.pathname
   const image = addTransitionTag(toPath)
 
-  const transition = document.createDocumentTransition()
-  transition.start(() => {
+  document.startViewTransition(() => {
     image?.classList.remove('tag-album-cover')
     event.detail.resume()
   })
