@@ -12,17 +12,17 @@
 } */
 
 .page-header {
-  page-transition-tag: header;
+  view-transition-name: header;
   contain: paint;
 }
 
 .album-image {
-  page-transition-tag: image;
+  view-transition-name: image;
   contain: paint;
 }
 
 .bottom-player {
-  page-transition-tag: player;
+  view-transition-name: player;
   contain: paint;
 }
 

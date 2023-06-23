@@ -2,35 +2,41 @@ import * as turbo from '@hotwired/turbo';
 
 turbo.start();
 
-function addImageClass(pathname) {
+function toggleImageClass(pathname, addClass = true) {
   // find the image that corresponds to the album that was clicked
   const albumLinkEl = document.querySelector(`[href="${pathname}"]`);
   const img = albumLinkEl.querySelector('img');
 
-  img.classList.add('album-image');
+  if (addClass) {
+    img.classList.add('album-image');
+  } else {
+    img.classList.remove('album-image');
+  }
 }
 
-function handleHomeNavigation(event) {
-  const transition = document.createDocumentTransition();
+async function handleHomeNavigation(event) {
+  let pathname
 
-  transition.start(async () => {
+  const transition = document.startViewTransition(async () => {
     await event.detail.resume();
 
-    const pathname =
+    pathname =
       turbo.navigator.lastVisit?.location.pathname ||
       turbo.navigator.currentVisit?.referrer.pathname;
 
-    addImageClass(pathname);
+    toggleImageClass(pathname);
   });
+
+  await transition.finished;
+
+  toggleImageClass(pathname, false);
 }
 
 function handleAlbumNavigation(event) {
   // find the image that corresponds to the album that was clicked
-  addImageClass(location.pathname);
+  toggleImageClass(location.pathname);
 
-  const transition = document.createDocumentTransition();
-
-  transition.start(() => {
+  document.startViewTransition(() => {
     event.detail.resume();
   });
 }
@@ -42,8 +48,8 @@ function beforeRender(event) {
   // loads the next page's HTML but doesn't render it
   event.preventDefault();
 
-  if (!'createDocumentTransition' in document) {
-    // no Shared Element Transition API support; fall back
+  if (!'startViewTransition' in document) {
+    // no View Transitions API support; fall back
     event.detail.resume();
     return;
   }
