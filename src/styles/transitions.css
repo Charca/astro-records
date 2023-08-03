@@ -1,8 +1,3 @@
-.tag-album-cover {
-  contain: paint;
-  view-transition-name: album-cover;
-}
-
 .vynil-animation-in {
   animation: appear 600ms ease-in-out 300ms forwards;
 }
