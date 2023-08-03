@@ -49,9 +49,11 @@ export default function Player() {
   const { title, artist, imageUrl } = currentTrack.value
 
   function whilePlaying() {
-    const percentage =
-      (audioPlayer.current.currentTime * 100) / audioPlayer.current.duration
-    setProgress(percentage)
+    if (audioPlayer.current.duration) {
+      const percentage =
+        (audioPlayer.current.currentTime * 100) / audioPlayer.current.duration
+      setProgress(percentage)
+    }
     progressRef.current = requestAnimationFrame(whilePlaying)
   }
 
