@@ -1,4 +1,5 @@
 ---
+import { ViewTransitions } from 'astro:transitions'
 import Footer from '../components/Footer.astro'
 import Header from '../components/Header.astro'
 import Player from '../components/Player'
@@ -17,12 +18,13 @@ const { title } = Astro.props
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="turbo-cache-control" content="no-cache" />
+    <!-- <meta name="turbo-cache-control" content="no-cache" /> -->
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <script>
+    <ViewTransitions />
+    <!-- <script>
       import '../scripts/router.js'
-    </script>
+    </script> -->
   </head>
   <body
     class="bg-white text-gray-600 work-sans leading-normal text-base tracking-normal"
@@ -30,8 +32,8 @@ const { title } = Astro.props
     <Header />
     <slot />
     <Footer />
-    <div id="audio-player" data-turbo-permanent>
-      <Player client:load />
+    <div id="audio-player">
+      <Player client:load transition:persist="player" />
     </div>
   </body>
 </html>

@@ -23,6 +23,7 @@ export default function Record({
         width="400"
         height="400"
         class="block rounded-md tag-album-cover relative z-10 bg-white"
+        style={`view-transition-name: record-${albumId};`}
       />
       <img src="/vynil-lp.webp" width="400" height="400" class={className} />
     </div>
