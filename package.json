@@ -14,7 +14,6 @@
     "@astrojs/netlify": "^2.5.2",
     "@astrojs/preact": "^1.2.0",
     "@astrojs/tailwind": "^4.0.0",
-    "@hotwired/turbo": "^7.2.0",
     "@preact/signals": "^1.2.0",
     "astro": "^2.10.0",
     "preact": "^10.16.0",
