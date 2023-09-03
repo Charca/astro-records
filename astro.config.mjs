@@ -9,7 +9,4 @@ export default defineConfig({
   integrations: [tailwind(), preact()],
   output: 'server',
   adapter: cloudflare(),
-  experimental: {
-    viewTransitions: true,
-  },
 })

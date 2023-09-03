@@ -1,4 +1,4 @@
-import { currentTrack, isPlaying, Track } from './state'
+import { currentTrack, isPlaying, type Track } from './state'
 
 type Props = {
   tracks: Track[]

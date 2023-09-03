@@ -12,7 +12,7 @@ export interface Props {
 const { title } = Astro.props
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -20,7 +20,7 @@ const { title } = Astro.props
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <ViewTransitions fallback="swap" />
+    <ViewTransitions />
   </head>
   <body
     class="bg-white text-gray-600 work-sans leading-normal text-base tracking-normal"
