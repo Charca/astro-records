@@ -88,7 +88,7 @@ export default function Player() {
 
   return (
     <div
-      class="fixed bottom-0 left-0 right-0 bg-gray-100"
+      class="fixed bottom-0 left-0 right-0 bg-gray-100 z-10"
       role="region"
       aria-labelledby="audio-player-heading"
     >
@@ -116,7 +116,7 @@ export default function Player() {
               ? Math.floor(audioPlayer.current.currentTime)
               : 0
           } seconds`}
-          class="bg-pink-500 h-1.5"
+          class="bg-pink-700 h-1.5"
           style={`width: ${progress}%`}
         ></div>
       </div>
@@ -130,10 +130,10 @@ export default function Player() {
           class="block rounded-md"
         />
         <div class="flex-1 min-w-0">
-          <div class="text-xl font-medium overflow-hidden text-ellipsis whitespace-nowrap">
+          <div class="text-xl text-black font-medium overflow-hidden text-ellipsis whitespace-nowrap">
             {title}
           </div>
-          <div class="text-xl text-gray-500 overflow-hidden text-ellipsis whitespace-nowrap">
+          <div class="text-xl text-gray-700 overflow-hidden text-ellipsis whitespace-nowrap">
             {artist}
           </div>
         </div>
@@ -141,8 +141,8 @@ export default function Player() {
         <div class="flex gap-6 items-center text-black">
           <button
             type="button"
-            class="focus:ring-2 focus:outline-none focus:ring-black"
-            onClick={() => {}}
+            disabled
+            class="opacity-50 focus-visible:ring-2 focus:outline-none focus:ring-black"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -159,7 +159,7 @@ export default function Player() {
 
           <button
             type="button"
-            class="focus:ring-2 focus:outline-none focus:ring-black"
+            class="focus-visible:ring-2 focus:outline-none focus:ring-black"
             onClick={() => (isPlaying.value = !isPlaying.value)}
           >
             {isPlaying.value ? PauseIcon : PlayIcon}
@@ -168,8 +168,8 @@ export default function Player() {
 
           <button
             type="button"
-            class="focus:ring-2 focus:outline-none focus:ring-black"
-            onClick={() => {}}
+            disabled
+            class="opacity-50 focus-visible:ring-2 focus:outline-none focus:ring-black"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

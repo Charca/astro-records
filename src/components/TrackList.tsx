@@ -58,7 +58,7 @@ export default function TrackList({
           <li class="first:border-t border-b">
             <button
               type="button"
-              class="hover:bg-gray-50 focus:ring-2 focus:outline-none focus:ring-black cursor-pointer px-6 py-4 flex basis grow w-full items-center"
+              class="hover:bg-gray-50 focus-visible:ring-2 focus:outline-none focus:ring-black cursor-pointer px-6 py-4 flex basis grow w-full items-center"
               aria-current={isCurrentTrack}
               onClick={() => {
                 currentTrack.value = {
