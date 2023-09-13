@@ -1,12 +1,12 @@
-import { currentTrack, isPlaying, type Track } from "./state";
+import { currentTrack, isPlaying, type Track } from './state'
 
 type Props = {
-  tracks: Track[];
-  albumId: string;
-  albumName: string;
-  artist: string;
-  imageUrl: string;
-};
+  tracks: Track[]
+  albumId: string
+  albumName: string
+  artist: string
+  imageUrl: string
+}
 
 export default function PlayButton({
   tracks,
@@ -26,9 +26,9 @@ export default function PlayButton({
           albumName,
           artist,
           imageUrl,
-        };
+        }
 
-        isPlaying.value = true;
+        isPlaying.value = true
       }}
     >
       <svg
@@ -46,5 +46,5 @@ export default function PlayButton({
       </svg>
       Play
     </button>
-  );
+  )
 }

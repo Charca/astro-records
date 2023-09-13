@@ -1,4 +1,4 @@
-import { isPlaying, currentTrack } from "./state";
+import { isPlaying, currentTrack } from './state'
 
 export default function Record({
   albumId,
@@ -6,16 +6,16 @@ export default function Record({
   title,
   imageUrl,
 }: {
-  albumId: string;
-  artist: string;
-  title: string;
-  imageUrl: string;
+  albumId: string
+  artist: string
+  title: string
+  imageUrl: string
 }) {
   const isPlayingCurrentRecord =
-    isPlaying.value && currentTrack.value.albumId === albumId;
+    isPlaying.value && currentTrack.value.albumId === albumId
   const className =
-    "absolute top-0 opacity-0 vynil-image vynil-animation-in" +
-    (isPlayingCurrentRecord ? "-spinning" : "");
+    'absolute top-0 opacity-0 vynil-image vynil-animation-in' +
+    (isPlayingCurrentRecord ? '-spinning' : '')
 
   return (
     <div class="relative shadow-xl mr-32 w-72 md:w-auto">
@@ -38,5 +38,5 @@ export default function Record({
         aria-hidden="true"
       />
     </div>
-  );
+  )
 }

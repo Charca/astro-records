@@ -1,6 +1,6 @@
-import { currentTrack, isPlaying } from "./state";
+import { currentTrack, isPlaying } from './state'
 
-import { useEffect, useState, useRef } from "preact/hooks";
+import { useEffect, useState, useRef } from 'preact/hooks'
 
 const PlayIcon = (
   <svg
@@ -17,7 +17,7 @@ const PlayIcon = (
       clip-rule="evenodd"
     />
   </svg>
-);
+)
 
 const PauseIcon = (
   <svg
@@ -34,57 +34,57 @@ const PauseIcon = (
       clip-rule="evenodd"
     />
   </svg>
-);
+)
 
 // This app doesn't have real songs, it only has a few songs
 // that we will play over and over as the user uses the app.
-const MAX_SONGS = 4;
+const MAX_SONGS = 4
 
 export default function Player() {
-  const audioPlayer = useRef<HTMLAudioElement>(null);
-  const progressRef = useRef(null);
-  const [songIndex, setSongIndex] = useState(4);
-  const [progress, setProgress] = useState(0);
+  const audioPlayer = useRef<HTMLAudioElement>(null)
+  const progressRef = useRef(null)
+  const [songIndex, setSongIndex] = useState(4)
+  const [progress, setProgress] = useState(0)
 
   if (currentTrack.value === null) {
-    return;
+    return
   }
 
-  const { title, artist, albumName, imageUrl } = currentTrack.value;
+  const { title, artist, albumName, imageUrl } = currentTrack.value
 
   function whilePlaying() {
     if (audioPlayer.current.duration) {
       const percentage =
-        (audioPlayer.current.currentTime * 100) / audioPlayer.current.duration;
-      setProgress(percentage);
+        (audioPlayer.current.currentTime * 100) / audioPlayer.current.duration
+      setProgress(percentage)
     }
-    progressRef.current = requestAnimationFrame(whilePlaying);
+    progressRef.current = requestAnimationFrame(whilePlaying)
   }
 
   useEffect(() => {
-    const newIndex = (songIndex % MAX_SONGS) + 1;
-    audioPlayer.current.src = `/mp3/song${newIndex}.mp3`;
-    audioPlayer.current.currentTime = 0;
-    audioPlayer.current.play();
-    setSongIndex(newIndex);
-  }, [title]);
+    const newIndex = (songIndex % MAX_SONGS) + 1
+    audioPlayer.current.src = `/mp3/song${newIndex}.mp3`
+    audioPlayer.current.currentTime = 0
+    audioPlayer.current.play()
+    setSongIndex(newIndex)
+  }, [title])
 
   useEffect(() => {
     if (isPlaying.value) {
-      audioPlayer.current?.play();
-      progressRef.current = requestAnimationFrame(whilePlaying);
+      audioPlayer.current?.play()
+      progressRef.current = requestAnimationFrame(whilePlaying)
     } else {
-      audioPlayer.current?.pause();
-      cancelAnimationFrame(progressRef.current);
+      audioPlayer.current?.pause()
+      cancelAnimationFrame(progressRef.current)
     }
-  }, [isPlaying.value]);
+  }, [isPlaying.value])
 
   useEffect(() => {
     if (progress >= 99.99) {
-      isPlaying.value = false;
-      setProgress(0);
+      isPlaying.value = false
+      setProgress(0)
     }
-  }, [progress]);
+  }, [progress])
 
   return (
     <div
@@ -163,7 +163,7 @@ export default function Player() {
             onClick={() => (isPlaying.value = !isPlaying.value)}
           >
             {isPlaying.value ? PauseIcon : PlayIcon}
-            <span class="sr-only">{isPlaying.value ? "Pause" : "Play"}</span>
+            <span class="sr-only">{isPlaying.value ? 'Pause' : 'Play'}</span>
           </button>
 
           <button
@@ -186,5 +186,5 @@ export default function Player() {
         </div>
       </div>
     </div>
-  );
+  )
 }

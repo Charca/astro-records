@@ -1,12 +1,12 @@
-import { currentTrack, isPlaying, type Track } from "./state";
+import { currentTrack, isPlaying, type Track } from './state'
 
 type Props = {
-  tracks: Track[];
-  albumName: string;
-  albumId: string;
-  artist: string;
-  imageUrl: string;
-};
+  tracks: Track[]
+  albumName: string
+  albumId: string
+  artist: string
+  imageUrl: string
+}
 
 const playIcon = (
   <svg
@@ -23,7 +23,7 @@ const playIcon = (
       clip-rule="evenodd"
     />
   </svg>
-);
+)
 
 const pauseIcon = (
   <svg
@@ -40,7 +40,7 @@ const pauseIcon = (
       clip-rule="evenodd"
     />
   </svg>
-);
+)
 
 export default function TrackList({
   tracks,
@@ -52,7 +52,7 @@ export default function TrackList({
   return (
     <ul class="text-xl" aria-label="Tracklist">
       {tracks.map((track, index) => {
-        const isCurrentTrack = track.id == currentTrack.value?.id;
+        const isCurrentTrack = track.id == currentTrack.value?.id
 
         return (
           <li class="first:border-t border-b">
@@ -67,9 +67,9 @@ export default function TrackList({
                   albumId,
                   artist,
                   imageUrl,
-                };
+                }
 
-                isPlaying.value = isCurrentTrack ? !isPlaying.value : true;
+                isPlaying.value = isCurrentTrack ? !isPlaying.value : true
               }}
             >
               <span class="text-gray-500 w-8 mr-2">
@@ -89,13 +89,13 @@ export default function TrackList({
               <span class="text-gray-500 ml-auto">{track.length}</span>
 
               <span class="sr-only">
-                (press to{" "}
-                {isCurrentTrack && isPlaying.value ? "pause)" : "play)"}
+                (press to{' '}
+                {isCurrentTrack && isPlaying.value ? 'pause)' : 'play)'}
               </span>
             </button>
           </li>
-        );
+        )
       })}
     </ul>
-  );
+  )
 }
