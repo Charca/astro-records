@@ -1,3 +1,4 @@
+import type { JSX } from 'preact/jsx-runtime'
 import { currentTrack, isPlaying, type Track } from './state'
 
 type Props = {
@@ -42,6 +43,15 @@ const pauseIcon = (
   </svg>
 )
 
+function renderIcon(icon: JSX.Element, position: number) {
+  return (
+    <span>
+      {icon}
+      <span class="sr-only">{position}</span>
+    </span>
+  )
+}
+
 export default function TrackList({
   tracks,
   albumId,
@@ -74,15 +84,11 @@ export default function TrackList({
             >
               <span class="text-gray-500 w-8 mr-2">
                 {isCurrentTrack && !isPlaying.value
-                  ? pauseIcon
+                  ? renderIcon(pauseIcon, track.position)
                   : isCurrentTrack && isPlaying.value
-                  ? playIcon
+                  ? renderIcon(playIcon, track.position)
                   : track.position}
               </span>
-
-              {isCurrentTrack ? (
-                <span class="sr-only">{track.position}</span>
-              ) : null}
               <span class="sr-only"> - </span>
               <span class="font-medium">{track.title}</span>
               <span class="sr-only"> - </span>
