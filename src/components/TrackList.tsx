@@ -2,6 +2,7 @@ import { currentTrack, isPlaying, type Track } from './state'
 
 type Props = {
   tracks: Track[]
+  albumName: string
   albumId: string
   artist: string
   imageUrl: string
@@ -9,17 +10,18 @@ type Props = {
 
 const playIcon = (
   <svg
-    aria-hidden="true"
-    class="w-6 h-6 mr-2 -ml-1 text-pink-600"
+    class="w-6 h-6 ml-1 text-pink-600"
     fill="currentColor"
     viewBox="0 0 20 20"
     xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+    focusable="false"
   >
     <path
       fill-rule="evenodd"
       d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
       clip-rule="evenodd"
-    ></path>
+    />
   </svg>
 )
 
@@ -28,7 +30,9 @@ const pauseIcon = (
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     fill="currentColor"
-    class="w-6 h-6 mr-2 -ml-1 text-pink-600"
+    class="w-6 h-6 ml-1 text-pink-600"
+    aria-hidden="true"
+    focusable="false"
   >
     <path
       fill-rule="evenodd"
@@ -41,37 +45,54 @@ const pauseIcon = (
 export default function TrackList({
   tracks,
   albumId,
+  albumName,
   artist,
   imageUrl,
 }: Props) {
   return (
-    <ul class="text-xl">
-      {tracks.map((track) => {
+    <ul class="text-xl" aria-label="Tracklist">
+      {tracks.map((track, index) => {
         const isCurrentTrack = track.id == currentTrack.value?.id
 
         return (
-          <li
-            class="hover:bg-gray-50 cursor-pointer px-6 py-4 flex border-b first:border-t items-center"
-            onClick={() => {
-              currentTrack.value = {
-                ...track,
-                albumId,
-                artist,
-                imageUrl,
-              }
+          <li class="first:border-t border-b">
+            <button
+              type="button"
+              class="hover:bg-gray-50 focus-visible:ring-2 focus:outline-none focus:ring-black cursor-pointer px-6 py-4 flex basis grow w-full items-center"
+              aria-current={isCurrentTrack}
+              onClick={() => {
+                currentTrack.value = {
+                  ...track,
+                  albumName,
+                  albumId,
+                  artist,
+                  imageUrl,
+                }
 
-              isPlaying.value = true
-            }}
-          >
-            <span class="text-gray-500 w-8 mr-2">
-              {isCurrentTrack && !isPlaying.value
-                ? pauseIcon
-                : isCurrentTrack && isPlaying.value
-                ? playIcon
-                : track.position}
-            </span>
-            <span class="font-medium">{track.title}</span>
-            <span class="text-gray-500 ml-auto">{track.length}</span>
+                isPlaying.value = isCurrentTrack ? !isPlaying.value : true
+              }}
+            >
+              <span class="text-gray-500 w-8 mr-2">
+                {isCurrentTrack && !isPlaying.value
+                  ? pauseIcon
+                  : isCurrentTrack && isPlaying.value
+                  ? playIcon
+                  : track.position}
+              </span>
+
+              {isCurrentTrack ? (
+                <span class="sr-only">{track.position}</span>
+              ) : null}
+              <span class="sr-only"> - </span>
+              <span class="font-medium">{track.title}</span>
+              <span class="sr-only"> - </span>
+              <span class="text-gray-500 ml-auto">{track.length}</span>
+
+              <span class="sr-only">
+                (press to{' '}
+                {isCurrentTrack && isPlaying.value ? 'pause)' : 'play)'}
+              </span>
+            </button>
           </li>
         )
       })}

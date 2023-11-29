@@ -10,7 +10,7 @@ const { id, name, artist, image_url } = Astro.props
 ---
 
 <div class="flex flex-col">
-  <a href={`/album/${id}`} class="text-black hover:text-pink-500">
+  <a href={`/album/${id}`} class="text-black hover:text-pink-700 focus-visible:ring-2 focus:outline-none focus:ring-black">
     <div
       class="shadow-md hover:shadow-lg relative"
       transition:name={`record-${id}`}
@@ -18,19 +18,22 @@ const { id, name, artist, image_url } = Astro.props
       <img
         class="card-image rounded-md relative z-10"
         src={image_url}
-        alt={name}
+        alt={`${artist} - ${name} album cover`}
+        aria-hidden="true"
         width="400"
         height="400"
       />
       <img
         src="/vynil-lp.webp"
+        alt=""
         width="400"
         height="400"
         transition:name={`vinyl-${id}`}
         class="absolute top-0 opacity-0 vynil-image opacity-0"
+        aria-hidden="true"
       />
     </div>
-    <p class="pt-4 font-semibold">{name}</p>
-    <p class="pt-1 text-gray-700">{artist}</p>
+  <div class="pt-4 font-semibold">{name}</div><span class="sr-only"> by</span>
+    <div class="pt-1 text-gray-700">{artist}</div>
   </a>
 </div>

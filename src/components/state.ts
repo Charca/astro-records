@@ -1,17 +1,18 @@
-import { signal } from '@preact/signals'
+import { signal } from "@preact/signals";
 
 export type Track = {
-  id: string
-  title: string
-  position: number
-  length: string
-}
+  id: string;
+  title: string;
+  position: number;
+  length: string;
+};
 
 export type PlayerTrack = Track & {
-  albumId: string
-  artist: string
-  imageUrl: string
-}
+  albumId: string;
+  albumName: string;
+  artist: string;
+  imageUrl: string;
+};
 
-export const isPlaying = signal(false)
-export const currentTrack = signal<PlayerTrack | null>(null)
+export const isPlaying = signal(false);
+export const currentTrack = signal<PlayerTrack | null>(null);

@@ -12,45 +12,49 @@ const response = await fetch(
 const album = await response.json()
 ---
 
-<Layout title="Astro Records">
-  <section>
+<Layout title={`${album.strAlbum} by ${album.strArtist} - Astro Records`}>
+  <section aria-labelledby="page-heading">
     <div
-      class="container mx-auto max-w-screen-lg px-6 lg:px-0 flex flex-col items-start md:items-end md:flex-row pt-8 pb-12 overflow-hidden"
+      class="container mx-auto max-w-screen-lg px-6 lg:px-0 flex flex-col items-start md:items-end md:flex-row pt-8 pb-12"
     >
       <Record
         client:visible
+        artist={album.strArtist}
         albumId={album.idAlbum}
         title={album.strAlbum}
         imageUrl={album.strAlbumThumb}
       />
       <div class="flex-1 flex flex-col justify-end pt-8">
-        <h1 class="text-5xl font-bold tracking-tight text-gray-900">
-          {album.strAlbum}
+        <h1 id="page-heading">
+          <div class="text-5xl font-bold tracking-tight text-gray-900">{album.strAlbum}</div>
+          <div class="mt-3 text-3xl">{album.strArtist}</div>
         </h1>
-        <p class="mt-3 text-3xl">{album.strArtist}</p>
-        <p class="mt-2 text-lg">{album.strGenre} — {album.intYearReleased}</p>
+        <div class="mt-2 text-lg">{album.strGenre} — {album.intYearReleased}</div>
         <div class="mt-3 flex">
           <PlayButton
             tracks={album.tracks}
             albumId={album.idAlbum}
+            albumName={album.strAlbum}
             artist={album.strArtist}
             imageUrl={album.strAlbumThumb}
             client:load
           />
-
           <button
+            disabled
             type="button"
-            class="text-pink-600 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-lg px-10 py-3 text-center inline-flex items-center dark:focus:ring-gray-500 mr-4"
+            class="opacity-50 text-pink-600 bg-gray-100 font-medium rounded-lg text-lg px-10 py-3 text-center inline-flex items-center dark:focus:ring-gray-500 mr-4"
           >
             <svg
               class="w-6 h-6 mr-2 -ml-1 text-pink-600"
               fill="currentColor"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+              focusable="false"
               ><path
                 fill-rule="evenodd"
                 d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z"
-                clip-rule="evenodd"></path>
+                clip-rule="evenodd"/>
             </svg>
 
             Shuffle
@@ -63,6 +67,7 @@ const album = await response.json()
       <TrackList
         tracks={album.tracks}
         albumId={album.idAlbum}
+        albumName={album.strAlbum}
         artist={album.strArtist}
         imageUrl={album.strAlbumThumb}
         client:visible

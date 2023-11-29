@@ -2,10 +2,12 @@ import { isPlaying, currentTrack } from './state'
 
 export default function Record({
   albumId,
+  artist,
   title,
   imageUrl,
 }: {
   albumId: string
+  artist: string
   title: string
   imageUrl: string
 }) {
@@ -19,7 +21,8 @@ export default function Record({
     <div class="relative shadow-xl mr-32 w-72 md:w-auto">
       <img
         src={imageUrl}
-        alt={title}
+        alt={`${artist} - ${title} album cover`}
+        aria-hidden="true"
         width="400"
         height="400"
         class="block rounded-md tag-album-cover relative z-10 bg-white"
@@ -27,10 +30,12 @@ export default function Record({
       />
       <img
         src="/vynil-lp.webp"
+        alt=""
         width="400"
         height="400"
         class={className}
         style={`view-transition-name: vinyl-${albumId};`}
+        aria-hidden="true"
       />
     </div>
   )
