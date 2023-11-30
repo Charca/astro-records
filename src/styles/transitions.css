@@ -43,3 +43,16 @@
     opacity: 0;
   }
 }
+
+::view-transition-group(header),
+::view-transition-group(player) {
+  z-index: 10;
+}
+
+::view-transition-old(header),
+::view-transition-new(header),
+::view-transition-old(player),
+::view-transition-new(player) {
+  animation: none;
+  mix-blend-mode: normal;
+}

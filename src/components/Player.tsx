@@ -91,6 +91,7 @@ export default function Player() {
       class="fixed bottom-0 left-0 right-0 bg-gray-100 z-10"
       role="region"
       aria-labelledby="audio-player-heading"
+      style={{ viewTransitionName: 'player' }}
     >
       <h2 id="audio-player-heading" class="sr-only">
         Audio player
